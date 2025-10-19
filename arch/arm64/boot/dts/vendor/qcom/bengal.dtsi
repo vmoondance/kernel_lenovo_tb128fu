@@ -2707,6 +2707,23 @@
 #include "bengal-pm.dtsi"
 #include "bengal-pinctrl.dtsi"
 #include "bengal-qupv3.dtsi"
+
+&qupv3_se1_spi {
+	status = "okay";
+
+	novatek_spi@0 {
+		compatible = "novatek,nt36523";
+		reg = <0>;
+		spi-max-frequency = <10000000>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&ts_spi_active>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <80 2>;
+		reset-gpios = <&tlmm 71 0>;
+	};
+};
+
+/ {
 #include "bengal-gpu.dtsi"
 #include "bengal-audio.dtsi"
 #include "bengal-sde-pll.dtsi"

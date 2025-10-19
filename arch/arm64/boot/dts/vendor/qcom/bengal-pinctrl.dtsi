@@ -1194,4 +1194,28 @@
 			};
 		};
 	};
+
+	ts_spi_active: ts_spi_active {
+		mux {
+			pins = "gpio80", "gpio71";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio80", "gpio71";
+			drive-strength = <2>;
+			bias-disable;
+		};
+	};
+
+	ts_spi_sleep: ts_spi_sleep {
+		mux {
+			pins = "gpio80", "gpio71";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio80", "gpio71";
+			drive-strength = <2>;
+			bias-pull-down;
+		};
+	};
 };

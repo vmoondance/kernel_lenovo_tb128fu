@@ -160,12 +160,9 @@
 		interrupts = <GIC_SPI 327 IRQ_TYPE_LEVEL_HIGH>;
 		spi-max-frequency = <50000000>;
 		qcom,wrapper-core = <&qupv3_0>;
-		dmas = <&gpi_dma0 0 0 1 64 0>,
-			<&gpi_dma0 1 0 1 64 0>;
-		dma-names = "tx", "rx";
-		status = "disabled";
-	};
-
+		        		dma-names = "tx", "rx";
+		        		status = "disabled";
+		        	};
 	/* SPI Instance */
 	qupv3_se1_spi: spi@4a84000 {
 		compatible = "qcom,spi-geni";
