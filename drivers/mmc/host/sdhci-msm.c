@@ -161,9 +161,7 @@
 
 /* 512 descriptors */
 #define SDHCI_MSM_MAX_SEGMENTS  (1 << 9)
-#ifdef CONFIG_MMC_SDHCI_BH201
 #define CORE_FREQ_100MHZ	(100 * 1000 * 1000)
-#endif
 #define TCXO_FREQ		19200000
 
 #define INVALID_TUNING_PHASE	-1
@@ -171,10 +169,8 @@
 #define sdhci_is_valid_gpio_testbus_trigger_int(_h) \
 	((_h)->pdata->testbus_trigger_irq >= 0)
 
-#ifdef CONFIG_MMC_SDHCI_BH201
 #define NUM_TUNING_PHASES		16
 #define MAX_DRV_TYPES_SUPPORTED_HS200	4
-#endif
 #define MSM_AUTOSUSPEND_DELAY_MS 100
 
 #define RCLK_TOGGLE 0x2
@@ -1447,9 +1443,9 @@ void sdhci_msm_exit_dbg_mode(struct sdhci_host *host)
 
 int sdhci_msm_execute_tuning(struct sdhci_host *host, u32 opcode)
 {
+	u8 phase, *data_buf, tuned_phases[NUM_TUNING_PHASES], tuned_phase_cnt;
 	unsigned long flags;
 	int tuning_seq_cnt = 10;
-	u8 phase, *data_buf, tuned_phases[NUM_TUNING_PHASES], tuned_phase_cnt;
 	const u32 *tuning_block_pattern = tuning_block_64;
 	int size = sizeof(tuning_block_64); /* Tuning pattern size in bytes */
 	int rc;

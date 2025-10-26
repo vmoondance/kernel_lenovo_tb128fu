@@ -176,7 +176,8 @@ bengalp-iot-idp-2gb-overlay.dtbo-base := bengalp-iot-2gb.dtb
 bengalp-iot-idp-usbc-2gb-overlay.dtbo-base := bengalp-iot-2gb.dtb
 bengalp-iot-idp-usbc-overlay.dtbo-base := bengalp-iot.dtb
 else
-dtb-$(CONFIG_ARCH_BENGAL) += bengal-rumi.dtb \
+dtb-$(CONFIG_ARCH_BENGAL) += bengal.dtb \
+                bengal-rumi.dtb \
                 bengal-qrd.dtb \
 		bengal-idp.dtb \
 		bengal-idp-nopmi.dtb \

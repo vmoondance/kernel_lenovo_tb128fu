@@ -3,6 +3,8 @@
  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
  */
 
+#define ETM_ARCH_V4			(0x40)
+
 #include <linux/kernel.h>
 #include <linux/moduleparam.h>
 #include <linux/init.h>

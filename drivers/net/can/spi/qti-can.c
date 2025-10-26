@@ -1523,7 +1523,7 @@ cleanup_privdata:
 static ssize_t show_mcu_firmware(struct kobject *kobj,
 			struct kobj_attribute *attr,
 			char *buf) {
-	char fw_ver_str[6];
+	char fw_ver_str[10];
 	uint8_t fw_ver_maj, fw_ver_min;
 	char *pfw_ver_str = fw_ver_str;
 
@@ -1534,18 +1534,18 @@ static ssize_t show_mcu_firmware(struct kobject *kobj,
 	if (g_fw_str->maj != 0) {
 		fw_ver_maj = g_fw_str->maj;
 		fw_ver_min = g_fw_str->min;
-		strcpy(fw_ver_str, "fw: ver");
+		snprintf(fw_ver_str, sizeof(fw_ver_str), "fw: ver");
 	} else {
 		fw_ver_maj = 0;
 		fw_ver_min = 0;
-		strcpy(fw_ver_str, "dummy:");
+		snprintf(fw_ver_str, sizeof(fw_ver_str), "dummy:");
 	}
 	return sprintf(buf, "%s (%d.%d)\n", pfw_ver_str, fw_ver_maj, fw_ver_min);
 }
 
 static struct kobj_attribute fw_version_attr = __ATTR(version, 0664, show_mcu_firmware, NULL);
 
-static int qti_can_create_sysfs_entry() {
+static int qti_can_create_sysfs_entry(void) {
 	int ret = 0;
 
 	pr_debug("%s: \n", __func__);

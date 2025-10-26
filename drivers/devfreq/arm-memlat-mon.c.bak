@@ -17,6 +17,7 @@
 #include <linux/of.h>
 #include <linux/of_irq.h>
 #include <linux/slab.h>
+#include <linux/perf_event.h>
 #include <linux/irq.h>
 #include <linux/cpu_pm.h>
 #include <linux/cpu.h>
@@ -164,7 +165,7 @@ static inline void read_event(struct event_data *event)
 	if (!event->pevent)
 		return;
 
-	total = perf_event_read_value(event->pevent, &enabled, &running);
+	total = perf_event_read_local(event->pevent, &enabled, &running);
 	ev_count = total - event->prev_count;
 	event->prev_count = total;
 	event->last_delta = ev_count;
@@ -191,10 +192,7 @@ static void update_counts(struct memlat_cpu_grp *cpu_grp)
 			common_evs[STALL_IDX].last_delta =
 				common_evs[CYC_IDX].last_delta;
 
-		if (delta != 0)
-			cpu_data->freq = common_evs[CYC_IDX].last_delta / delta;
-		else
-			cpu_data->freq = common_evs[CYC_IDX].last_delta;
+		cpu_data->freq = common_evs[CYC_IDX].last_delta / delta;
 		cpu_data->stall_pct = mult_frac(100,
 				common_evs[STALL_IDX].last_delta,
 				common_evs[CYC_IDX].last_delta);
