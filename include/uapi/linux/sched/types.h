@@ -4,21 +4,17 @@
 
 #include <linux/types.h>
 
-<<<<<<< Updated upstream
-=======
 /*
  * On Android/Bionic, struct sched_param is already defined by libc's
- * <sched.h>. Guard the UAPI definition to avoid redefinition errors when
- * userspace code includes both pthread.h/sched.h and generated kernel
- * headers.
+ * <sched.h>. In kernel code, it's defined in linux/sched.h.
+ * Guard the UAPI definition to avoid redefinition errors.
  */
-#ifndef __BIONIC__
+#if !defined(__KERNEL__) && !defined(__BIONIC__)
 struct sched_param {
 	int sched_priority;
 };
 #endif
 
->>>>>>> Stashed changes
 #define SCHED_ATTR_SIZE_VER0	48	/* sizeof first published struct */
 #define SCHED_ATTR_SIZE_VER1	56	/* add: util_{min,max} */
 
